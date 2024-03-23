@@ -1,4 +1,4 @@
-import { cardTemplate, openModalImage } from '../index.js'
+const cardTemplate = document.querySelector("#card-template").content;
 
 // @todo: Функция создания карточки.
 /*Работа функции организована таким образом: в оператор попадает объект из массива
@@ -29,7 +29,7 @@ function createCard(cardArrObject, delCard, cardLike, openModalImage) {
   }
 
   /*Функция лайка, если класса нет, то добавит, если есть, то удалит */
-  function cardLike (event) {
+  function likeCard (event) {
     if (event.target.matches('.card__like-button')) {
     event.target.classList.toggle('card__like-button_is-active');
     }
@@ -38,5 +38,6 @@ function createCard(cardArrObject, delCard, cardLike, openModalImage) {
   export {
     createCard,
     delCard,
-    cardLike
+    likeCard,
+    cardTemplate
   };

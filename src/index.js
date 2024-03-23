@@ -1,10 +1,7 @@
 import './pages/index.css';
 import { initialCards } from './scripts/cards.js';
-import { createCard, delCard, cardLike} from './scripts/card.js';
+import { createCard, delCard, likeCard, cardTemplate} from './scripts/card.js';
 import { openModal, closeModal } from './scripts/modal.js';
-
-// @todo: Темплейт карточки
-const cardTemplate = document.querySelector("#card-template").content; //В переменную cardTemplate передали "контент" внутри тегов <template id="card-template">.
 
 // @todo: DOM узлы
 const cardList = document.querySelector(".places__list"); //В переменную cardList присваиваем элемент places__list, который мы будем наполнять в будущем.
@@ -21,6 +18,8 @@ const formEditProfileTitle = formEditProfile.querySelector('.popup__input_type_n
 const formEditProfileDescripion = formEditProfile.querySelector('.popup__input_type_description');
 const profileDescription = document.querySelector('.profile__description');
 const profileTitle = document.querySelector('.profile__title');
+const popupImg = document.querySelector('.popup__image');
+const popupDescription = document.querySelector('.popup__caption');
 const allPopups = document.querySelectorAll('.popup');
 
 // @todo: Вывести карточки на страницу c массива.
@@ -28,7 +27,7 @@ const allPopups = document.querySelectorAll('.popup');
 Append это функция которая добавит элемент в концец другого элемента или узла. Append в свою очередь добавляет в конец элемент cardItem,
 который в свою очередь является результатом возвращения функции addCard...*/
 initialCards.forEach(function (initialCards) {
-  cardList.append(createCard(initialCards, delCard, cardLike, openModalImage));
+  cardList.append(createCard(initialCards, delCard, likeCard, openModalImage));
 });
 
 /*Все попапы теперь анимированы */
@@ -56,15 +55,12 @@ function openProfileEditForm(event) {
 
 /*Функция открытия модального окна с формой новой карточки, которая очищается */
 function openNewCardForm (event) {
-  formNewCard.reset();
   openModal(popupTypeNewCard);
 }
 
 // Функция открытия модального окна с изображением карточки + описание
 function openModalImage (event) {
   const cardImg = event.target;
-  const popupImg = document.querySelector('.popup__image');
-  const popupDescription = document.querySelector('.popup__caption');
   popupImg.src = cardImg.src;
   popupImg.alt = cardImg.alt;
   popupDescription.textContent = cardImg.alt;
@@ -78,7 +74,7 @@ function addNewCard (event) {
     name: formNewCardTitle.value,
     link: formNewCardUrl.value
   }
-  cardList.prepend(createCard(cardValue, delCard, cardLike, openModalImage));
+  cardList.prepend(createCard(cardValue, delCard, likeCard, openModalImage));
   closeModal(popupTypeNewCard);
   formNewCard.reset();
 }
@@ -98,4 +94,4 @@ formEditProfile.addEventListener('submit', saveProfile);
 //со значениями которые ввёл пользователь.
 formNewCard.addEventListener('submit', addNewCard)
 
-export { cardTemplate, openModalImage };
+export { cardTemplate };

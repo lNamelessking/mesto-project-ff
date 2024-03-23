@@ -16,9 +16,8 @@ function closeModal (popup) {
 
 /*Функция закрытия модального окна на кнопку Escape.  */
 function closeModalOnKey (event) {
-    const popupTypeOpened = document.querySelector('.popup_is-opened');
-
     if (event.key === 'Escape') {
+        const popupTypeOpened = document.querySelector('.popup_is-opened');
         closeModal(popupTypeOpened);
     }
 }
@@ -26,9 +25,11 @@ function closeModalOnKey (event) {
 /*Фунция закрытия окна по клику на крестик либо по оверлею, в данном случае, мы смотрим, произошёл
 ли кл */
 function closeModalOnClick (event) {
-    const popupTypeOpened = document.querySelector('.popup_is-opened');
-
-    if (event.target.matches('.popup__close') || event.target === popupTypeOpened) {
+    if (
+      event.target.matches('.popup__close') ||
+      event.target.classList.contains('popup_is-opened')
+      ) {
+        const popupTypeOpened = event.target.closest('.popup_is-opened')
         closeModal(popupTypeOpened);
     }
 }

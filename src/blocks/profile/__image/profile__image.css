@@ -1,4 +1,5 @@
 .profile__image {
+  position: relative;
   width: 120px;
   height: 120px;
   -webkit-border-radius: 50%;
@@ -7,6 +8,26 @@
   background-size: cover;
   background-position: center;
   margin: 0 29px 0 0;
+}
+
+.profile__image-overlay {
+  position: absolute;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  transition: 0.3s ease;
+  inset: 0;
+}
+
+.profile__image-overlay-svg {
+  position: absolute;
+  inset: 40%;
+  z-index: 1;
+}
+
+.profile__image-overlay:hover {
+  opacity: 1;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 740px) {
